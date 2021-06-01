@@ -94,11 +94,11 @@ var dhtInfo;
 setInterval(() => {
     updateDHT11Info().then(json => {
         if (json.status == "success") {
-            var isUnderMin = json.t <= MIN_T;
-            var isOverMax = json.t >= MAX_T;
+            var isUnderMin = json.hic <= MIN_T;
+            var isOverMax = json.hic >= MAX_T;
             var delta = 0;
             if (dhtInfo) {
-                delta = json.t - dhtInfo.t;
+                delta = json.hic - dhtInfo.hic;
             }
             if (isUnderMin) {
                 if (airconStatus) {
