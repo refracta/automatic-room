@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[      5672,        169]
-NotebookOptionsPosition[      5067,        150]
-NotebookOutlinePosition[      5496,        167]
-CellTagsIndexPosition[      5453,        164]
+NotebookDataLength[      5708,        159]
+NotebookOptionsPosition[      5195,        141]
+NotebookOutlinePosition[      5625,        158]
+CellTagsIndexPosition[      5582,        155]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -33,48 +33,29 @@ Cell[BoxData[{
    "]"}]}], "\n", 
  RowBox[{
   RowBox[{"GetGraph", "[", 
-   RowBox[{"data_", ",", "tic_"}], "]"}], ":=", 
+   RowBox[{"data_", ",", "tic_", ",", "key_", ",", "expl_"}], "]"}], ":=", 
   RowBox[{"ListLinePlot", "[", 
    RowBox[{
-    RowBox[{"{", 
+    RowBox[{"Table", "[", 
      RowBox[{
-      RowBox[{"Table", "[", 
+      RowBox[{"{", 
        RowBox[{
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"tic", "*", 
-           RowBox[{"(", 
-            RowBox[{"i", "-", "1"}], ")"}]}], ",", 
-          RowBox[{
-           RowBox[{"data", "[", 
-            RowBox[{"[", "i", "]"}], "]"}], "[", "\"\<h\>\"", "]"}]}], "}"}], 
-        ",", 
-        RowBox[{"{", 
-         RowBox[{"i", ",", "1", ",", 
-          RowBox[{"Length", "[", "data", "]"}]}], "}"}]}], "]"}], ",", 
-      RowBox[{"Table", "[", 
-       RowBox[{
-        RowBox[{"{", 
-         RowBox[{
-          RowBox[{"tic", "*", 
-           RowBox[{"(", 
-            RowBox[{"i", "-", "1"}], ")"}]}], ",", 
-          RowBox[{
-           RowBox[{"data", "[", 
-            RowBox[{"[", "i", "]"}], "]"}], "[", "\"\<hic\>\"", "]"}]}], 
-         "}"}], ",", 
-        RowBox[{"{", 
-         RowBox[{"i", ",", "1", ",", 
-          RowBox[{"Length", "[", "data", "]"}]}], "}"}]}], "]"}]}], "}"}], 
-    ",", 
+        RowBox[{"tic", "*", 
+         RowBox[{"(", 
+          RowBox[{"i", "-", "1"}], ")"}]}], ",", 
+        RowBox[{
+         RowBox[{"data", "[", 
+          RowBox[{"[", "i", "]"}], "]"}], "[", "key", "]"}]}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"i", ",", "1", ",", 
+        RowBox[{"Length", "[", "data", "]"}]}], "}"}]}], "]"}], ",", 
     RowBox[{"PlotLegends", "\[Rule]", 
-     RowBox[{"{", 
-      RowBox[{"\"\<Humidity\>\"", ",", "\"\<CTemperature\>\""}], "}"}]}]}], 
-   "]"}]}], "\n", 
+     RowBox[{"{", "expl", "}"}]}]}], "]"}]}], "\n", 
  RowBox[{"Column", "[", 
   RowBox[{"{", 
    RowBox[{
-    RowBox[{"DateString", "[", "]"}], ",", 
+    RowBox[{"\"\<Start:  \>\"", "<>", 
+     RowBox[{"DateString", "[", "]"}]}], ",", 
     RowBox[{"DynamicModule", "[", 
      RowBox[{
       RowBox[{"{", 
@@ -84,16 +65,26 @@ Cell[BoxData[{
         RowBox[{"tic", "=", "5"}]}], "}"}], ",", 
       RowBox[{"Dynamic", "[", 
        RowBox[{
-        RowBox[{"Refresh", "[", 
-         RowBox[{
-          RowBox[{"{", 
-           RowBox[{
-            RowBox[{"AppendTo", "[", 
-             RowBox[{"data", ",", 
-              RowBox[{"GetDHT11", "[", "]"}]}], "]"}], ",", 
-            RowBox[{"GetGraph", "[", 
-             RowBox[{"data", ",", "tic"}], "]"}]}], "}"}], "[", 
-          RowBox[{"[", "2", "]"}], "]"}], "]"}], ",", 
+        RowBox[{"Column", "@", 
+         RowBox[{"Part", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"AppendTo", "[", 
+              RowBox[{"data", ",", 
+               RowBox[{"GetDHT11", "[", "]"}]}], "]"}], ",", 
+             RowBox[{"\"\<Update: \>\"", "<>", 
+              RowBox[{"DateString", "[", "]"}]}], ",", 
+             RowBox[{"GetGraph", "[", 
+              RowBox[{
+              "data", ",", "tic", ",", "\"\<hic\>\"", ",", 
+               "\"\<CTemperature\>\""}], "]"}], ",", 
+             RowBox[{"GetGraph", "[", 
+              RowBox[{
+              "data", ",", "tic", ",", "\"\<h\>\"", ",", "\"\<Humidity\>\""}],
+               "]"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"2", ",", "3", ",", "4"}], "}"}]}], "]"}]}], ",", 
         RowBox[{"TrackedSymbols", "\[Rule]", 
          RowBox[{"{", "}"}]}], ",", 
         RowBox[{"UpdateInterval", "\[Rule]", "tic"}]}], "]"}]}], "]"}]}], 
@@ -101,34 +92,38 @@ Cell[BoxData[{
  CellChangeTimes->{{3.8315607313664684`*^9, 3.831560793055273*^9}, {
   3.831561179413274*^9, 3.8315612277539434`*^9}, {3.8315612811149416`*^9, 
   3.8315613463785143`*^9}, {3.8315613910680094`*^9, 3.8315614209136972`*^9}, {
-  3.831561471173972*^9, 3.831561488442972*^9}},
- CellLabel->"In[10]:=",ExpressionUUID->"d4c4ca06-3326-40fd-9485-d82ae12028a1"],
+  3.831561471173972*^9, 3.831561488442972*^9}, {3.8315627810364065`*^9, 
+  3.8315628858380537`*^9}, {3.8315629228696938`*^9, 3.8315629567394576`*^9}, {
+  3.831563059938115*^9, 3.8315631021887302`*^9}, {3.8315632282115145`*^9, 
+  3.831563229155512*^9}, {3.8315632835105596`*^9, 3.8315632965795574`*^9}, {
+  3.831563345221385*^9, 3.831563407749385*^9}, {3.8315634561285048`*^9, 
+  3.8315636633605413`*^9}, {3.8315636968535595`*^9, 3.8315638194451466`*^9}},
+ CellLabel->
+  "In[131]:=",ExpressionUUID->"d4c4ca06-3326-40fd-9485-d82ae12028a1"],
 
 Cell[BoxData[
  TagBox[GridBox[{
-    {"\<\"Wed 2 Jun 2021 03:38:08\"\>"},
+    {"\<\"Start:  Wed 2 Jun 2021 04:16:59\"\>"},
     {
      DynamicModuleBox[{$CellContext`data$$ = {
        Association[
-       "status" -> "success", "h" -> 7, "t" -> 25, "F" -> 77, "hif" -> 74.729,
-         "hic" -> 23.73809], 
+       "status" -> "success", "h" -> 9, "t" -> 25.7, "F" -> 78.26, "hif" -> 
+        76.209, "hic" -> 24.56031], 
        Association[
-       "status" -> "success", "h" -> 6, "t" -> 25, "F" -> 77, "hif" -> 74.682,
-         "hic" -> 23.71198], 
-       Association[
-       "status" -> "success", "h" -> 7, "t" -> 25, "F" -> 77, "hif" -> 74.729,
-         "hic" -> 23.73809], 
-       Association[
-       "status" -> "success", "h" -> 7, "t" -> 25, "F" -> 77, "hif" -> 74.729,
-         "hic" -> 23.73809]}, $CellContext`tic$$ = 5}, 
+       "status" -> "success", "h" -> 9, "t" -> 25.7, "F" -> 78.26, "hif" -> 
+        76.209, "hic" -> 24.56031]}, $CellContext`tic$$ = 5}, 
       DynamicBox[ToBoxes[
-        Refresh[
+        Column[
          Part[{
            AppendTo[$CellContext`data$$, 
             $CellContext`GetDHT11[]], 
-           $CellContext`GetGraph[$CellContext`data$$, $CellContext`tic$$]}, 
-          2]], StandardForm],
-       ImageSizeCache->{372., {71., 78.}},
+           StringJoin["Update: ", 
+            DateString[]], 
+           $CellContext`GetGraph[$CellContext`data$$, $CellContext`tic$$, 
+            "hic", "CTemperature"], 
+           $CellContext`GetGraph[$CellContext`data$$, $CellContext`tic$$, "h",
+             "Humidity"]}, {2, 3, 4}]], StandardForm],
+       ImageSizeCache->{372., {153., 160.}},
        TrackedSymbols:>{},
        UpdateInterval->5],
       DynamicModuleValues:>{}]}
@@ -137,19 +132,15 @@ Cell[BoxData[
    GridBoxAlignment->{"Columns" -> {{Left}}},
    GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
   "Column"]], "Output",
- CellChangeTimes->{{3.8315612878529387`*^9, 3.831561325988469*^9}, {
-  3.831561391759019*^9, 3.8315614213456964`*^9}, {3.8315614724779696`*^9, 
-  3.83156148893397*^9}},
- CellLabel->"Out[12]=",ExpressionUUID->"d211ca19-d675-4090-838b-577fce41b0f6"]
-}, Open  ]],
-
-Cell[BoxData[""], "Input",
  CellChangeTimes->{
-  3.831560949707239*^9},ExpressionUUID->"ae9af707-e933-4e40-9b72-\
-f4f44ac6d5f0"]
+  3.8315634290153885`*^9, 3.8315634709585047`*^9, {3.8315635931396046`*^9, 
+   3.831563665237559*^9}, {3.8315637064095592`*^9, 3.831563819767146*^9}},
+ CellLabel->
+  "Out[133]=",ExpressionUUID->"12f08d09-d7a2-4c51-8f1a-0516c5dc3dab"]
+}, Open  ]]
 },
-WindowSize->{760, 813},
-WindowMargins->{{82, Automatic}, {Automatic, 18}},
+WindowSize->{1920, 997},
+WindowMargins->{{-8, Automatic}, {Automatic, -8}},
 Magnification:>1.2 Inherited,
 FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (March 18, 2020)",
 StyleDefinitions->"Default.nb",
@@ -167,10 +158,9 @@ CellTagsIndex->{}
 (*NotebookFileOutline
 Notebook[{
 Cell[CellGroupData[{
-Cell[580, 22, 2863, 82, 601, "Input",ExpressionUUID->"d4c4ca06-3326-40fd-9485-d82ae12028a1"],
-Cell[3446, 106, 1474, 36, 211, "Output",ExpressionUUID->"d211ca19-d675-4090-838b-577fce41b0f6"]
-}, Open  ]],
-Cell[4935, 145, 128, 3, 35, "Input",ExpressionUUID->"ae9af707-e933-4e40-9b72-f4f44ac6d5f0"]
+Cell[580, 22, 3153, 79, 325, "Input",ExpressionUUID->"d4c4ca06-3326-40fd-9485-d82ae12028a1"],
+Cell[3736, 103, 1443, 35, 375, "Output",ExpressionUUID->"12f08d09-d7a2-4c51-8f1a-0516c5dc3dab"]
+}, Open  ]]
 }
 ]
 *)
