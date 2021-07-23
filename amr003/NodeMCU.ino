@@ -24,8 +24,8 @@ ESP8266WebServer server(WEB_SERVER_PORT);
 const int JSON_MEMORY = 256;
 const int SERIAL_BAUD_RATE = 115200;
 
-int SG90_1_DEFAULT_ANGLE = 0;
-int SG90_2_DEFAULT_ANGLE = 0;
+int SG90_1_DEFAULT_ANGLE = 90;
+int SG90_2_DEFAULT_ANGLE = 90;
 const int SG90_1_PIN = D7;
 const int SG90_2_PIN = D8;
 Servo SG90_1; 
@@ -91,6 +91,22 @@ String handleRequest(String json){
       int afterAngle = doc["angle"];
       SG90_2.write(afterAngle);
       return getAngleInfo1(beforeAngle, afterAngle);
+    } if(String(F("SG90_1_WRITE_WITH_RELOCATE")).equals(type)) {
+      int beforeAngle = SG90_1.read();
+      int afterAngle = doc["angle"];
+      int delayTime = doc["delay"];
+      SG90_1.write(afterAngle);
+      delay(delayTime);
+      SG90_1.write(SG90_1_DEFAULT_ANGLE);
+      return getAngleInfo1(beforeAngle, SG90_1_DEFAULT_ANGLE);
+    } if(String(F("SG90_2_WRITE_WITH_RELOCATE")).equals(type)) {
+      int beforeAngle = SG90_2.read();
+      int afterAngle = doc["angle"];
+      int delayTime = doc["delay"];
+      SG90_2.write(afterAngle);
+      delay(delayTime);
+      SG90_2.write(SG90_2_DEFAULT_ANGLE);
+      return getAngleInfo1(beforeAngle, SG90_2_DEFAULT_ANGLE);
     } else {
       return F("{\"status\":\"error\",\"reason\":\"failed to find type\"}");
     }
