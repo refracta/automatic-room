@@ -16,6 +16,8 @@ A project to capture infrared remote signals and replay the same signals using N
 A project to remotely control a dot matrix using Arduino Uno, NodeMCU (with dot matrix, infrared LED, DHT11, and buzzer). The dot matrix can be adjusted to display desired shapes through HTTP API, shows the current time and temperature, and includes a controller script to automatically adjust the air conditioner based on the current room temperature.
 ![](https://github.com/user-attachments/assets/74b79846-aaf7-411b-b31b-fed94877c778)
 
+https://github.com/user-attachments/assets/56b7ff04-a02c-4204-a1d5-0778ebdac84f
+
 https://github.com/user-attachments/assets/ee9a248a-cbb0-4f73-97c3-7af57b2a966f
 
 ## [amr002](amr002)
