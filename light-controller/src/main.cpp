@@ -358,7 +358,7 @@ void setupServer()
         String scriptURL = readStringFromEEPROM(I_SCRIPT_ENTRYPOINT);
         if (scriptURL.length() == 0)
         {
-            scriptURL = "/script";
+            // scriptURL = "/script";
             scriptURL = "https://refracta.github.io/automatic-room/light-controller/script.js";
             writeStringToEEPROM(I_SCRIPT_ENTRYPOINT, scriptURL);
             EEPROM.commit();
