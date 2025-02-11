@@ -92,7 +92,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.appendChild(configForm);
 
         const configType = document.getElementById("config-type");
-        const configFields = document.getElementById("config-fields");
 
         configType.addEventListener("change", () => updateConfigFields(configType.value, statusData));
         updateConfigFields(configType.value, statusData);
@@ -107,7 +106,9 @@ document.addEventListener("DOMContentLoaded", function () {
             if (params.type === 'reset') {
                 await resetConfig();
             } else {
-                await setConfig(`/set/${params.type}?${new URLSearchParams(params).toString()}`);
+                const type = params.type;
+                delete params['type'];
+                await setConfig(`/set/${type}?${new URLSearchParams(params).toString()}`);
             }
             fetchStatus();
         });

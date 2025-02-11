@@ -32,7 +32,7 @@ struct LightDevice
 LightDevice lights[] = {
     {"light1", D2, "D2", true, nullptr},
     {"light2", D3, "D3", true, nullptr},
-    {"light3", D4, "D4", true, nullptr}
+    {"light3", D5, "D5", true, nullptr}
 };
 
 enum ProcessStatus
